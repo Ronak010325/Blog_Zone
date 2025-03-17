@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <% if (locals.blogsList) { %>
+        <% for (let i= blogsList.length - 1; i >= 0; i--) { %>
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img class="bd-placeholder-img card-img-top" src="data:image/jpeg;base64,<%= blogsList[i].img %>" width="100%" height="280px" role="img" preserveAspectRatio="xMidYMid slice" focusable="true" />
+              <div class="card-body  d-flex flex-column">
+                <div style="flex: auto;" class="card-text">
+                    <% if(blogsList[i].users) { %>
+                    <div class="title-section">
+                      <h4> <%= blogsList[i].blog_title %> </h4>
+                      <form action="/profile/delete" method="POST">
+                        <input value="<%= blogsList[i].id %>" name="delete" hidden/>
+                        <button class="delete btn btn-outline-danger" type="submit">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                          </svg>
+                        </button>
+                      </form>
+                    </div>
+                    <% } else { %>
+                    <h4> <%= blogsList[i].blog_title %> </h4>
+                    <% } %>
+                    <p class="author"><b>Author</b>: <i>@<%= blogsList[i].username %></i></p>
+                    <%- blogsList[i].blog_text %>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <form action="/view" method="post">
+                      <input value="<%= blogsList[i].id %>" name="view" hidden/>
+                      <button type="submit" class="btn btn-sm btn-outline-primary">Read</button>
+                    </form>
+                    <% if(blogsList[i].users) { %>
+                      <form action="/profile/edit" method="post">
+                        <input value="<%= blogsList[i].id %>" name="edit" hidden/>
+                        <button type="submit" class="btn btn-sm btn-outline-success">Edit</button>
+                      </form>
+                    <% } %>
+                  </div>
+                  <small class="text-body-secondary"><%= blogsList[i].time_created %> </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      <% } else { %>
+        <h1>No Blog Posts Yet ...</h1>
+      <% } %>
+    </div>
+</div>

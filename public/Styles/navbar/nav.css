@@ -1,0 +1,31 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.navbar-nav {
+    gap: 10px;
+    font-size: 20px;
+}
+
+.nav-link {
+    font-family: "Montserrat", serif;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    background-color: #3797a3;
+    text-align: center;
+    padding: 9px;
+    border-radius: 5px;
+    border: 0.5px solid #3797a3;
+}
+
+.link:hover {
+    background-color: white;
+    color: #3797a3;
+}

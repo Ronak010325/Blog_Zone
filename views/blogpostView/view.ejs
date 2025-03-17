@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Zone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="/Styles/navbar/nav.css" rel="styleSheet"> <!-- Navbar CSS -->
+    <link href="/Styles/viewStyle/view.css" rel="styleSheet">
+</head>
+<body>
+    <%- include("../NavBar/nav.ejs") %>
+    
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-8">
+              <img class="cover_img" src="data:image/jpeg;base64,<%= blogInfo.img %>" alt="cover-page"/>
+              <div class="title_container">
+                <h2 class="display-5 link-body-emphasis mb-1"><%= blogInfo.blog_title %></h2>
+                <form action="/view/like" method="POST">
+                    <input type="text" name="like_blogpost" value="<%= blogInfo.blog_id %>" hidden/>
+                    <button type="submit" class="btn btn-outline-danger">
+                      <% if(likeEmoji) { %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+                        </svg>
+                        <% } else { %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
+                            <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
+                        </svg>
+                        <% } %>
+                        <%= likecount %>
+                    </button> 
+                </form>
+              </div>
+        
+              <article class="blog-post">
+                <h5>From the <%= blogInfo.name %></h5>
+                <p class="blog-post-meta">Last Updated on: <%= blogInfo.time_created %></p>
+                  <div class="Blog-text"><pre> <%- blogInfo.blog_text %> </pre></div>
+            </div>
+        
+            <div class="col-md-4">
+              <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4 mb-3 bg-body-tertiary rounded">
+                    <div class="user-formate">
+                        <div class="center">
+                            <img class="user-logo" src="<%= blogInfo.profileimg %>" alt="User Logo"/>
+                        </div>
+                        <div class="profileBody">
+                            <h5>Username : @<%= blogInfo.username %></h5>
+                            <h6>Name : <%= blogInfo.name %></h6>
+                        </div>
+                        <form action="/view/profile" method="post">
+                            <input type="text" name="user_id" value="<%= blogInfo.id %>" hidden/>
+                            <button type="submit" class="btn btn-sm btn-outline-primary">
+                                VIEW
+                            </button>
+                        </form>
+                    </div>
+                </div>
+        
+                <div>
+                  <h4 class="fst-italic">Similiar posts</h4>
+                  <ul class="list-unstyled">
+                    <% if(similiarPosts.length > 0) { %>
+                      <% for (let i = 0 ; i < similiarPosts.length ; i++) { %>
+                        <li>
+                          <form action="/view/blog" method="POST">
+                            <input type="text" name="blog_id" value="<%= similiarPosts[i].id %>" hidden/>
+                            <button type="submit" class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top">
+                              <img src="data:image/jpeg;base64,<%= similiarPosts[i].img %>" class="bd-placeholder-img" width="50%" preserveAspectRatio="xMidYMid slice" focusable="false" />
+                              <div class="col">
+                                <h6 class="mb-0"><%= similiarPosts[i].blog_title %></h6>
+                                <small>From : @<i><%= similiarPosts[i].username %></i></small>
+                              </div>
+                            </button>
+                          </form>
+                        </li>
+                        <% } %>
+                        <% } else { %>
+                          <h5>No Similiar Posts Yet..</h5>
+                          <% } %>
+                    </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="comments">
+            <h1>Comments: <i>(<%= commentsCount %>)</i></h1>
+            <form class="commentText" action="/view/comment" method="POST">
+                <input type="text" name="blog_id" value="<%= blogInfo.blog_id %>" hidden/>
+                <input type="text" name="comment" placeholder="Enter Your Comment" />
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="22" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                    </svg>
+                </button>
+            </form>
+            <ul class="comments_ulist">
+                <% if(comments.length != 0) { %>
+                  <% for (let i = 0 ; i < comments.length ; i++) { %>
+                    <li>
+                      <div class="comment_content">
+                        <h5><%= comments[i].blog_comment %></h5>
+                        <p>From: @<i><%= comments[i].username %></i></p>
+                      </div>
+                      <% if(comments[i].user_id == user_id) { %>
+                        <form class="comments_form" action="/view/comment_delete" method="POST">
+                          <input type="text" name="delete_comment" value="<%= comments[i].id %>" hidden/>
+                          <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                          </button>
+                        </form>
+                      <% } %>
+                    </li>
+                    <% } %>
+                  <% } else { %>
+                    <h5>No Comments yet.</h5>
+                    <% } %>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

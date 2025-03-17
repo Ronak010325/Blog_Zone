@@ -1,0 +1,143 @@
+body > .container {
+    margin-top: 37px;
+}
+
+.cover_img {
+    width: fit-content;
+    max-width: 100%;
+    max-height: 50%;
+    margin-bottom: 10px;
+}
+
+.title_container {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+    border-bottom: 3px solid rgba(128, 128, 128, 0.091);
+    display: flex;
+    gap: 5px;
+}
+
+.title_container h2 {
+    flex: auto;
+}
+
+.title_container .btn {
+    border-radius: 50px;
+}
+
+pre {
+    white-space: pre-line;
+    font-family: "Montserrat", serif;
+    overflow: hidden;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+pre h1,
+pre h2,
+pre h3,
+pre h4,
+pre h5,
+pre h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.user-formate .center{
+    display: flex;
+    justify-content: center;
+}
+
+.user-formate .center img {
+    border-radius: 50px;
+    width: 100px;
+}
+
+.list-unstyled {
+    width: fit-content;
+}
+
+.list-unstyled button {
+    background-color: white;
+    border: 0;
+}
+
+.comments form {
+    padding: 0px 20px;
+    display: flex;
+}
+
+.comments form input {
+    flex: auto;
+    border: 0.5px solid black;
+    padding: 10px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-right: 0;
+}
+
+.comments form button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0.5px solid #3797a3;
+    color: white;
+    background-color: #3797a3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 10px;
+    padding-right: 15px;
+}
+
+.comments form button:hover {
+    background-color: white;
+    color: #3797a3;
+}
+
+.comments ul {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0px 20px;
+}
+
+.comments ul li {
+    padding: 5px;
+    border-bottom:0.5px solid black;
+    display: flex;
+    gap: 5px;
+}
+
+.comments_ulist p {
+    margin-bottom: 2px;
+}
+
+.comments ul li .comment_content {
+    flex: auto;
+}
+
+.comments ul li .comments_form {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.comments ul li .comments_form button {
+    justify-content: flex-start;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+@media (max-width: 426px) {
+    .comments .commentText {
+        padding: 0px;
+    }
+
+    .comments .comments_ulist {
+        padding: 0;
+    }
+
+    pre {
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,186 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.pop-up{
+  z-index: 1000;
+  font-family: "Montserrat", serif;
+  padding: 10px;
+  color: green;
+  font-size: 20px;
+  display: inline;
+  background-color: greenyellow;
+  border: 1px solid greenyellow;
+  border-radius: 5px;
+  position: absolute;
+  left: 45%;
+  top:20px;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hide{
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+nav,
+footer {
+  flex: 0 0 auto;
+}
+
+main {
+  text-align: center;
+  flex: 1 0 auto;
+}
+
+.title {
+    text-align: center;
+    letter-spacing: 3px;
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 3.2rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    padding: 0;
+    margin-top: 40px;
+    background-color: grey;
+}
+
+.container .left,.right {
+    background-color: white;
+    padding: 20px 40px;
+}
+
+.container h4,p {
+    text-align: center;
+}
+
+.container h4 {
+    margin-bottom: 20px;
+}
+
+.left form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left input {
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+.message {
+    resize: none;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+/* wave animation */
+
+footer {
+    position: relative;
+    width: 100%;
+    color: white;
+  }
+  
+  footer .wave {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(https://i.ibb.co/HLZrgxgL/wave.png);
+    background-size: 1000px 100px;
+  }
+  
+  footer .wave#wave1 {
+    z-index: 1000;
+    opacity: 1;
+    bottom: 0;
+    animation: animateWave 4s linear infinite;
+  }
+  
+  footer .wave#wave2 {
+    z-index: 999;
+    opacity: 0.5;
+    bottom: 10px;
+    animation: animateWave_02 4s linear infinite;
+  }
+  footer .wave#wave3 {
+    z-index: 1000;
+    opacity: 0.2;
+    bottom: 0;
+    animation: animateWave 3s linear infinite;
+  }
+  
+  footer .wave#wave4 {
+    z-index: 999;
+    opacity: 0.7;
+    bottom: 20px;
+    animation: animateWave_02 3s linear infinite;
+  }
+  
+  @keyframes animateWave {
+    0% {
+      background-position-x: 1000px;
+    }
+    100% {
+      background-position-x: 0px;
+    }
+  }
+  
+  @keyframes animateWave_02 {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: 1000px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      margin-top: 10px;
+    }
+
+    .container {
+      height: 50%;
+    }
+
+    main {
+      padding: 0 10px 90px;
+    }
+  }
+  
+  @media (max-width: 426px) {
+    .title {
+      font-size: 2.3rem;
+    }
+
+    main {
+      padding: 0 10px 90px;
+    }
+
+    .container {
+      grid-template-columns: auto;
+    }
+  }

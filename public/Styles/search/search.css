@@ -1,0 +1,166 @@
+.searchContainer {
+    padding: 1rem 10rem;
+}
+
+.searchContainer form {
+    display: flex;
+}
+
+.searchContainer form .content {
+    flex: auto;
+    margin: 0;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px solid black;
+    border-right: 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    outline: 0;
+}
+
+.searchContainer form button {
+    border: 0.5px solid #3797a3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    color: white;
+    background-color: #3797a3;
+    padding: 10px;
+}
+
+.searchContainer form button:hover {
+    background-color: white;
+    color: #3797a3;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categories h5 {
+    margin: auto 0;
+}
+
+.categories input {
+    background-color: #3796a31f;
+    padding: 3px 6px;
+    border:0.5px solid #3797a3;
+    border-radius: 50px;
+    color: #3797a3;
+    letter-spacing: 1px;
+}
+
+.categories input:hover {
+    color: white;
+    background-color: #3797a3;
+}
+
+.container-row {
+    display: grid;
+    grid-template-columns: auto 200px;
+    padding: 15px 5px;
+    gap: 10px;
+}
+
+.container-row .search_section_title {
+    text-align: center;
+}
+
+.blog-list {
+    flex: auto;
+}
+
+.blog-list .container {
+    padding-right: 0;
+}
+
+.blog-list .title-section {
+    display: flex;
+}
+
+.blog-list .title-section h4 {
+    flex: auto;
+}
+
+.blog-list .title-section .delete {
+    background-color: white;
+    border: 0.5px solid red;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.blog-list .title-section .delete:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: red;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.btn-group {
+    gap: 3px;
+}
+
+.username-list {
+    padding: 0 5px 10px;
+    border: 0.5px solid #3797a3;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.username-list .ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.username-list .ul input {
+    padding: 10px;
+    border:0.5px solid #3797a3;
+    color: #15727f;
+    border-radius: 50px;
+}
+
+.username-list .ul input:hover {
+    color: white;
+    background-color: #3797a3;
+}
+
+@media (max-width: 768px) {
+    .searchContainer {
+        padding: 10px;
+    }
+
+    .categories {
+        flex-wrap: wrap;
+        padding: 0 10px;
+        gap: 5px;
+    }
+
+    .categories input {
+        width: fit-content;
+    }
+
+    .container-row {
+        grid-template-columns: auto;
+    }
+
+    .blog-list .container {
+        padding-right: calc(var(--bs-gutter-x) * .5);
+    }
+
+    .username-list .ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .username-list .ul input {
+        width: fit-content;
+    }
+}

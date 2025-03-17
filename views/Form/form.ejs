@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Zone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="/Styles/navbar/nav.css" rel="styleSheet">
+    <link href="/Styles/Form/form.css" rel="styleSheet">
+</head>
+<body>
+    
+    <%- include("../NavBar/nav.ejs") %>
+
+        <% if(locals.edit) { %>
+            <form action="/edit/submit" method="POST" enctype="multipart/form-data">
+                <input type="text" name="blogId" value="<%= blogId %>" hidden/>
+                <input class="title" type="text" name="blogTitle" value="<%= blogD.blog_title %>" placeholder="Enter Blog Title" required/>
+                <textarea name="blogText" class="text-area" placeholder="Enter Blog Content ... [ You can use Heading Tags to give Headings (⚠️Be sure to close the heading tag <h4></h4> !!) ]" rows="5" required><%= blogD.blog_text %>
+                </textarea>
+                <div>
+                    Enter Categories : 
+                    <select class="category" name="category" required>
+                        <option value="<%= blogD.category %>"><%= blogD.category %></option>
+                        <% if(blogD.category != 'Music') {%>
+                            <option value="Music">Music</option>
+                        <% } %>
+                        <% if(blogD.category != 'Movies') {%>
+                            <option value="Movies">Movies</option>
+                        <% } %>
+                        <% if(blogD.category != 'Sports') {%>
+                            <option value="Sports">Sports</option>
+                        <% } %>
+                        <% if(blogD.category != 'Tech') {%>
+                            <option value="Tech">Tech</option>
+                        <% } %>
+                        <% if(blogD.category != 'Others') {%>
+                            <option value="Others">Others</option>
+                        <% } %>
+                    </select>
+                </div>
+                <input class="imgInput" type="file" name="image" accept="image/*" value="data:image/jpeg;base64,<%= blogD.img %>">
+                <div class="submitButton">
+                    <button type="submit" class="btn btn-outline-primary">UPDATE</button>
+                </div>
+            </form>
+        <% } else { %>
+            <form action="/CreateBlog/submit" method="POST" enctype="multipart/form-data">
+                <h1>CREATE</h1>
+                <input class="title" type="text" name="blogTitle" placeholder="Enter Blog Title" required/>
+                <textarea name="blogText" class="text-area" placeholder="Enter Blog Content ... [ You can use Heading Tags to give Headings (⚠️Be sure to close the heading tag <h4></h4> !!) ]" rows="5" required
+                ></textarea>
+                <div>
+                    Enter Categories : 
+                    <select class="category" name="category" required>
+                        <option>Select Category</option>
+                        <option value="Music">Music</option>
+                        <option value="Movies">Movies</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Tech">Tech</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <input class="imgInput" type="file" name="image" accept="image/*" required>
+                <div class="submitButton">
+                    <button type="submit" class="btn btn-outline-primary">PUBLISH</button>
+                </div>
+            </form>
+        <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

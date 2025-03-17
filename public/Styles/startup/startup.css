@@ -1,0 +1,48 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 15px;
+    gap: 10px;
+    box-shadow: 5px 2px 5px 2px rgb(45, 45, 45);
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+}
+
+.form-control{
+    padding: 10px;
+    font-family: "Montserrat", serif;
+}
+
+.btn{
+    font-family: "Montserrat", serif;
+    width: 100%;
+}
+
+.IconLogo{
+    margin: auto;
+}
+
+p{
+    margin: 0;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}

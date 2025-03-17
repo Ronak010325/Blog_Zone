@@ -1,0 +1,32 @@
+body {
+    height: 100vh;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    height: 87%;
+}
+
+.vertical-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 15px;
+    gap: 10px;
+    box-shadow: 5px 2px 5px 2px rgb(45, 45, 45);
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+}
+
+.error {
+    color: red;
+}

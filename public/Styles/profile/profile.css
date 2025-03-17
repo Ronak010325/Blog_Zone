@@ -1,0 +1,96 @@
+body {
+    padding-bottom: 15px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main > .profile {
+    flex: auto;
+    padding: 20px;
+    margin-right: 0;
+}
+
+.profileBody .buttonGroup {
+    display: flex;
+    gap: 5px;
+}
+
+main > .container .user-formate {
+    display: flex;
+    gap: 20px;
+}
+
+.user-formate img {
+    width: 7rem;
+    border-radius: 50%;
+}
+
+.user-formate .profileBody {
+    flex:auto;
+}
+
+.noBlog {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.author {
+    margin: 5px 0px;
+}
+
+.title-section {
+    display: flex;
+}
+
+.title-section h4 {
+    flex: auto;
+}
+
+.title-section .delete {
+    background-color: white;
+    border: 0.5px solid red;
+    padding: 0;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.title-section .delete:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: red;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.btn-group {
+    gap: 3px;
+}
+
+@media (max-width: 426px) {
+    .user-formate img {
+        height: 7rem;
+    }
+
+    .profileBody h4 {
+        font-size: 1rem;
+    }
+
+    .profileBody h4 i {
+        font-size: 0.9rem;
+    }
+
+    .profileBody h6 {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,7 @@
+<form class="ul" action="/search/user" method="POST">
+    <% if(locals.userList) { %>
+        <% for (let i = 0 ; i < userList.length ; i++) { %>
+            <input type="submit" value="<%= userList[i].username %>" name="user" />
+        <% } %>
+    <% } %>
+</form>

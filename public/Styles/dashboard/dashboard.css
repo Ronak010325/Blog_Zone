@@ -1,0 +1,81 @@
+body {
+    padding-bottom: 15px;
+}
+
+.center {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 9px 0px;
+}
+
+.pop-up{
+    z-index: 1000;
+    font-family: "Montserrat", serif;
+    padding: 10px;
+    color: green;
+    font-size: 20px;
+    display: inline;
+    background-color: greenyellow;
+    border: 1px solid greenyellow;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hide{
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hero {
+    width: 100%;
+    height: 80vh;
+    background: url("https://media.licdn.com/dms/image/v2/C4D12AQGTUS85PMy0XA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1641200554997?e=2147483647&v=beta&t=P6dHdmgBWZdx_DJU4esvNwWmWYW_21Hzl6TLgqWYXaM");
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+.recent {
+    margin: 10px 0px;
+    text-align: center;
+    color: rgba(128, 128, 128, 0.729);
+}
+
+.author {
+    margin: 5px 0px;
+}
+
+.title-section {
+    display: flex;
+}
+
+.title-section h4 {
+    flex: auto;
+}
+
+.title-section .delete {
+    background-color: white;
+    border: 0.5px solid red;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.title-section .delete:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: red;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.btn-group {
+    gap: 3px;
+}
