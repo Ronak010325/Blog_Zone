@@ -13,8 +13,10 @@
 </head>
 <body>
     <% if(locals.message) { %>
-        <div class="pop-up" id="pop-up">
-            <%= message %>
+        <div class="center">
+            <div class="pop-up" id="pop-up">
+                <%= message %>
+            </div>
         </div>
     <% } %>
     <%- include("../NavBar/nav.ejs") %>
@@ -58,6 +60,7 @@
     <script>
         setTimeout(() => {
             document.getElementById("pop-up").classList.add("hide");
+            document.getElementById("pop-up").style.display="none";
         }, 3000);
     </script>
 </body>

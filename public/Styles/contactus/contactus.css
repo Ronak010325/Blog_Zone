@@ -9,6 +9,14 @@ body {
   justify-content: stretch;
 }
 
+.center {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 9px 0px;
+}
+
 .pop-up{
   z-index: 1000;
   font-family: "Montserrat", serif;
@@ -19,9 +27,6 @@ body {
   background-color: greenyellow;
   border: 1px solid greenyellow;
   border-radius: 5px;
-  position: absolute;
-  left: 45%;
-  top:20px;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
