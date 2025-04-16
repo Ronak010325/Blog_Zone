@@ -685,7 +685,10 @@ app.post("/follow",async (req, res) => {
     try {
       const follow = req.body.follow;
       const currentUser = req.user.id;
-      await db.query("INSERT INTO following_list VALUES ($1, $2)",[follow, currentUser]);
+      const checking = await db.query("SELECT * FROM following_list WHERE following_=$1 AND follower_=$2",[currentUser, follow]);
+      if(checking.rowCount == 0) {
+        await db.query("INSERT INTO following_list VALUES ($1, $2)",[follow, currentUser]);
+      } 
       const userid = req.body.follow;
       const user_id = req.user.id;
       const result = await db.query("SELECT blogs.id,user_id,name,username,blog_title,blog_text,time_created,img FROM user_info JOIN blogs ON user_info.id = blogs.user_id WHERE user_id = $1 ORDER BY id",[
