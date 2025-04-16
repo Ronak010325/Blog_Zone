@@ -11,7 +11,6 @@ main {
 main > .profile {
     flex: auto;
     padding: 20px;
-    margin-right: 0;
 }
 
 .profileBody .buttonGroup {
@@ -25,7 +24,7 @@ main > .container .user-formate {
 }
 
 .user-formate img {
-    width: 7rem;
+    width: 8.2rem;
     border-radius: 50%;
 }
 
@@ -77,7 +76,19 @@ main > .container .user-formate {
     gap: 3px;
 }
 
+.followers_container {
+    cursor: default;
+}
+
 @media (max-width: 426px) {
+    main > .container .user-formate {
+        gap: 10px;
+    }
+
+    main > .profile {
+        padding:20px 10px
+    }
+
     .user-formate img {
         height: 7rem;
     }
@@ -92,5 +103,8 @@ main > .container .user-formate {
 
     .profileBody h6 {
         font-size: 0.9rem;
+    }
+    .followers_container h5{
+        font-size: 14px;
     }
 }

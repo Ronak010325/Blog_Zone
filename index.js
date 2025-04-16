@@ -216,11 +216,17 @@ app.get("/profile" , async (req, res) => {
       });
       reducer(user_id, resultRow);
       // usersProfileCon = usersProfile(user_id, user);
+      const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1",[user_id]);
+      const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1",[user_id]);
+      const following = await db.query("SELECT * FROM following_list WHERE following_ = $1",[user_id]);
       res.render("Profile/profile.ejs",{
         profileId: user_id,
         user: user,
         blogsList: resultRow,
-        usersprofile: usersProfile(user_id, user)
+        usersprofile: usersProfile(user_id, user),
+        post_Count: post_count.rowCount,
+        follower_count: followers.rowCount,
+        following_count: following.rowCount,
       });
     } catch (error) {
       console.log(error);
@@ -406,11 +412,20 @@ app.post("/view/profile", async (req, res) => {
         obj.img = obj.img ? obj.img.toString("base64") : null;
       });
       reducer(user_id, resultRow);
+      const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1",[userid]);
+      const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1",[userid]);
+      const following = await db.query("SELECT * FROM following_list WHERE following_ = $1",[userid]);
+      const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2",[userid, user_id]);
       res.render("Profile/profile.ejs",{
         profileId: user_id,
         user: user,
         blogsList: resultRow,
-        usersprofile: usersProfile(user_id, user)
+        usersprofile: usersProfile(user_id, user),
+        post_Count: post_count.rowCount,
+        follower_count: followers.rowCount,
+        following_count: following.rowCount,
+        bloggersId: userid,
+        checkFollowing: check.rowCount
       });
     } catch (error) {
       console.log(error);
@@ -633,6 +648,8 @@ app.post("/search/user",async (req, res) => {
       const result = await db.query("SELECT blogs.id,user_id,name,username,blog_title,blog_text,time_created,img FROM user_info JOIN blogs ON user_info.id = blogs.user_id WHERE username = $1",[
         inputUsername
       ]);
+      const UserIdResult = await db.query("SELECT id FROM user_info WHERE username = $1",[inputUsername]);
+      const userid = UserIdResult.rows[0].id;
       const user_info = await db.query("SELECT * FROM user_info WHERE username = $1",[inputUsername]);
       const user = user_info.rows;
       let resultRow = result.rows;
@@ -640,11 +657,20 @@ app.post("/search/user",async (req, res) => {
         obj.img = obj.img ? obj.img.toString("base64") : null;
       });
       reducer(user_id, resultRow);
+      const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1",[userid]);
+      const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1",[userid]);
+      const following = await db.query("SELECT * FROM following_list WHERE following_ = $1",[userid]);
+      const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2",[userid, user_id]);
       res.render("Profile/profile.ejs",{
         profileId: user_id,
         user: user,
         blogsList: resultRow,
-        usersprofile: usersProfile(user_id, user)
+        usersprofile: usersProfile(user_id, user),
+        post_Count: post_count.rowCount,
+        follower_count: followers.rowCount,
+        following_count: following.rowCount,
+        bloggersId: userid,
+        checkFollowing: check.rowCount
       });
     } catch (error) {
       console.log(error);
@@ -653,6 +679,88 @@ app.post("/search/user",async (req, res) => {
     res.redirect("/Login");
   }
 });
+
+app.post("/follow",async (req, res) => {
+  if(req.isAuthenticated()) {
+    try {
+      const follow = req.body.follow;
+      const currentUser = req.user.id;
+      await db.query("INSERT INTO following_list VALUES ($1, $2)",[follow, currentUser]);
+      const userid = req.body.follow;
+      const user_id = req.user.id;
+      const result = await db.query("SELECT blogs.id,user_id,name,username,blog_title,blog_text,time_created,img FROM user_info JOIN blogs ON user_info.id = blogs.user_id WHERE user_id = $1 ORDER BY id",[
+        userid
+      ]);
+      const user_info = await db.query("SELECT * FROM user_info WHERE id = $1",[userid]);
+      const user = user_info.rows;
+      resultRow = result.rows;
+      resultRow.map((obj) => {
+        obj.img = obj.img ? obj.img.toString("base64") : null;
+      });
+      reducer(user_id, resultRow);
+      const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1",[userid]);
+      const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1",[userid]);
+      const following = await db.query("SELECT * FROM following_list WHERE following_ = $1",[userid]);
+      const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2",[userid, user_id]);
+      res.render("Profile/profile.ejs",{
+        profileId: user_id,
+        user: user,
+        blogsList: resultRow,
+        usersprofile: usersProfile(user_id, user),
+        post_Count: post_count.rowCount,
+        follower_count: followers.rowCount,
+        following_count: following.rowCount,
+        bloggersId: userid,
+        checkFollowing: check.rowCount
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    res.redirect("/Login");
+  }
+});
+
+app.post("/unfollow",async (req, res) => {
+  if(req.isAuthenticated()) {
+    try {
+      const unfollow = req.body.unfollow;
+      const currentUser = req.user.id;
+      await db.query("DELETE FROM following_list WHERE following_ = $1 AND follower_ = $2",[currentUser, unfollow]);
+      const userid = req.body.unfollow;
+      const user_id = req.user.id;
+      const result = await db.query("SELECT blogs.id,user_id,name,username,blog_title,blog_text,time_created,img FROM user_info JOIN blogs ON user_info.id = blogs.user_id WHERE user_id = $1 ORDER BY id",[
+        userid
+      ]);
+      const user_info = await db.query("SELECT * FROM user_info WHERE id = $1",[userid]);
+      const user = user_info.rows;
+      resultRow = result.rows;
+      resultRow.map((obj) => {
+        obj.img = obj.img ? obj.img.toString("base64") : null;
+      });
+      reducer(user_id, resultRow);
+      const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1",[userid]);
+      const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1",[userid]);
+      const following = await db.query("SELECT * FROM following_list WHERE following_ = $1",[userid]);
+      const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2",[userid, user_id]);
+      res.render("Profile/profile.ejs",{
+        profileId: user_id,
+        user: user,
+        blogsList: resultRow,
+        usersprofile: usersProfile(user_id, user),
+        post_Count: post_count.rowCount,
+        follower_count: followers.rowCount,
+        following_count: following.rowCount,
+        bloggersId: userid,
+        checkFollowing: check.rowCount
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    res.redirect("/Login");
+  }
+})
 
 passport.use(
   "login",

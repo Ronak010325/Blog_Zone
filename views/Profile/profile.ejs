@@ -20,6 +20,11 @@
                 <div class="profileBody">
                     <h4>Username : <i>@<%= user[0].username %></i></h4>
                     <h6>Name : <%= user[0].name %></h6>
+                    <div class="followers_container d-flex gap-3">
+                        <h5><b>Post</b> <%= post_Count %></h5>
+                        <h5><b>Followers</b> <%= follower_count %> </h5>
+                        <h5><b>Following</b> <%= following_count %> </h5>
+                    </div>
                     <% if(usersprofile) { %>
                         <div class="buttonGroup">
                             <form action="/profile/editUser" method="post">
@@ -28,6 +33,18 @@
                             </form>
                             <a href="/logout" class="btn btn-outline-danger">Log Out</a>
                         </div>
+                    <% } else { %>
+                        <% if (checkFollowing == 0) { %>
+                            <form action="/follow" method="post">
+                                <input value="<%= bloggersId %>" name="follow" hidden/>
+                                <button type="submit" class="btn btn-outline-primary">Follow</button>
+                            </form>
+                        <% } else { %>
+                            <form action="/unfollow" method="post">
+                                <input value="<%= bloggersId %>" name="unfollow" hidden/>
+                                <button type="submit" class="btn btn-outline-primary">Unfollow</button>
+                            </form>
+                            <% } %>
                     <% } %>
                 </div>
             </div>
