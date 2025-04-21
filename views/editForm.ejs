@@ -9,7 +9,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="/Styles/navbar/nav.css" rel="styleSheet">
-    <link href="/Styles/Profile/edit.css" rel="styleSheet">
+    <style>
+        body {
+            height: 100vh;
+        }
+
+        .form{
+            display: flex;
+            justify-content: center;
+            height: 87%;
+        }
+
+        .vertical-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        form {
+            width: 350px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px 15px;
+            gap: 10px;
+            box-shadow: 5px 2px 5px 2px rgb(45, 45, 45);
+            background-color: rgb(226, 226, 226);
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <%- include("NavBar/nav.ejs") %>
