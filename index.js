@@ -152,7 +152,7 @@ app.get("/Dashboard", async (req, res) => {
         obj.img = obj.img ? obj.img.toString("base64") : null;
       });
       reducer(user_id, resultRow);
-      res.render("Dashboard/dashboard", {
+      res.render("Dashboard/dashboard.ejs", {
         message: message,
         blogsList: resultRow
       });
