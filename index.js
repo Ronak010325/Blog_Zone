@@ -8,6 +8,9 @@ import bcrypt from "bcrypt";
 import { Strategy } from "passport-local";
 import flash from "express-flash";
 import multer from "multer";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from "path";
 
 const app = express();
 const port = 3000;
@@ -70,6 +73,11 @@ function usersProfile(user_id, array) {
 
 env.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
