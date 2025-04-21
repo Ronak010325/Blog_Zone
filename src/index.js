@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
-import db from "./Database/database.js";
+import db from "../Database/database.js";
 import env from "dotenv";
 import session from "express-session";
 import passport from "passport";
@@ -77,7 +77,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src', 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
