@@ -12,7 +12,7 @@
     <link href="/Styles/search/search.css" rel="styleSheet">
 </head>
 <body>
-    <%- include("../NavBar/nav.ejs") %>
+    <%- include("NavBar/nav.ejs") %>
     
     <div class="searchContainer">
         <form action="/search" method="POST">
@@ -39,7 +39,7 @@
         <div class="blog-list">
             <h3 class="search_section_title">BLOGS :</h3>
             <% if(blogsList.length > 0) { %>
-            <%- include("../DashBoard/blog_layout.ejs") %>
+            <%- include("blog_layout.ejs") %>
             <% } else { %>
                 <h3>No Blog Post Yet...</h3>
             <% } %>
@@ -47,7 +47,7 @@
         <div class="username-list">
             <h3 class="search_section_title">USERS : </h3>
             <% if(userList.length > 0) { %>
-            <%- include("./user_layout.ejs") %>
+            <%- include("user_layout.ejs") %>
             <% } else { %>
                 <h5>No User yet...</h5>
             <% } %>

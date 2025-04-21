@@ -12,7 +12,7 @@
     <link href="/Styles/profile/profile.css" rel="styleSheet">
 </head>
 <body>
-    <%- include("../NavBar/nav.ejs") %>
+    <%- include("NavBar/nav.ejs") %>
     <main>
         <div class="container profile">
             <div class="user-formate">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <% if(blogsList.length) { %>
-            <%- include("../DashBoard/blog_layout.ejs") %>
+            <%- include("blog_layout.ejs") %>
         <% } else { %>
             <div class="container noBlog">
                 <h1 style="text-align: center;color: gray;">No Blog Posts Yet.</h1>

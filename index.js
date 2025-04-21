@@ -159,7 +159,7 @@ app.get("/Dashboard", async (req, res) => {
 
 app.get("/CreateBlog", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("Form/form.ejs");
+    res.render("form.ejs");
   } else {
     res.redirect("/Login");
   }
@@ -177,7 +177,7 @@ app.get("/search", async (req, res) => {
       reducer(user_id, resultRow);
       const users = await db.query("SELECT username FROM user_info");
       const userList = users.rows;
-      res.render("Search/search.ejs", {
+      res.render("search.ejs", {
         blogsList: resultRow,
         userList: userList
       });
@@ -193,7 +193,7 @@ app.get("/contact", (req, res) => {
   const message = req.session.successMessage;
   req.session.successMessage = null;
   if (req.isAuthenticated()) {
-    res.render("ContactUs/contactUs.ejs", {
+    res.render("contactUs.ejs", {
       message: message
     });
   } else {
@@ -220,7 +220,7 @@ app.get("/profile", async (req, res) => {
       const post_count = await db.query("SELECT * FROM blogs WHERE user_id = $1", [user_id]);
       const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1", [user_id]);
       const following = await db.query("SELECT * FROM following_list WHERE following_ = $1", [user_id]);
-      res.render("Profile/profile.ejs", {
+      res.render("profile.ejs", {
         profileId: user_id,
         user: user,
         blogsList: resultRow,
@@ -255,7 +255,7 @@ app.get("/view", async (req, res) => {
       similarPostList.map((obj) => {
         obj.img = obj.img ? obj.img.toString("base64") : null;
       });
-      res.render("blogpostView/view.ejs", {
+      res.render("view.ejs", {
         blogInfo: viewBloginfo,
         likecount: likeCount,
         user_id: user_id,
@@ -417,7 +417,7 @@ app.post("/view/profile", async (req, res) => {
       const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1", [userid]);
       const following = await db.query("SELECT * FROM following_list WHERE following_ = $1", [userid]);
       const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2", [userid, user_id]);
-      res.render("Profile/profile.ejs", {
+      res.render("profile.ejs", {
         profileId: user_id,
         user: user,
         blogsList: resultRow,
@@ -461,7 +461,7 @@ app.post("/profile/edit", async (req, res) => {
         obj.img = obj.img ? obj.img.toString("base64") : null;
       });
       const blogDetails = result.rows[0];
-      res.render("Form/form.ejs", {
+      res.render("form.ejs", {
         edit: true,
         blogD: blogDetails,
         blogId: blog_id
@@ -560,7 +560,7 @@ app.post("/contact/submit", async (req, res) => {
 app.post("/profile/editUser", (req, res) => {
   const Reqname = req.user.name;
   const Requsername = req.user.username;
-  res.render("Profile/editForm.ejs", {
+  res.render("editForm.ejs", {
     name: Reqname,
     username: Requsername
   });
@@ -602,7 +602,7 @@ app.post("/search", async (req, res) => {
       reducer(user_id, resultRow);
       const users = await db.query("SELECT username FROM user_info WHERE username = $1", [ogContent]);
       const userList = users.rows;
-      res.render("Search/search.ejs", {
+      res.render("search.ejs", {
         blogsList: resultRow,
         userList: userList
       });
@@ -629,7 +629,7 @@ app.post("/search/categories", async (req, res) => {
       reducer(user_id, resultRow);
       const users = await db.query("SELECT username FROM user_info");
       const userList = users.rows;
-      res.render("Search/search.ejs", {
+      res.render("search.ejs", {
         blogsList: resultRow,
         userList: userList
       });
@@ -662,7 +662,7 @@ app.post("/search/user", async (req, res) => {
       const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1", [userid]);
       const following = await db.query("SELECT * FROM following_list WHERE following_ = $1", [userid]);
       const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2", [userid, user_id]);
-      res.render("Profile/profile.ejs", {
+      res.render("profile.ejs", {
         profileId: user_id,
         user: user,
         blogsList: resultRow,
@@ -706,7 +706,7 @@ app.post("/follow", async (req, res) => {
       const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1", [userid]);
       const following = await db.query("SELECT * FROM following_list WHERE following_ = $1", [userid]);
       const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2", [userid, user_id]);
-      res.render("Profile/profile.ejs", {
+      res.render("profile.ejs", {
         profileId: user_id,
         user: user,
         blogsList: resultRow,
@@ -747,7 +747,7 @@ app.post("/unfollow", async (req, res) => {
       const followers = await db.query("SELECT * FROM following_list WHERE follower_ = $1", [userid]);
       const following = await db.query("SELECT * FROM following_list WHERE following_ = $1", [userid]);
       const check = await db.query("SELECT * FROM following_list WHERE follower_= $1 AND following_= $2", [userid, user_id]);
-      res.render("Profile/profile.ejs", {
+      res.render("profile.ejs", {
         profileId: user_id,
         user: user,
         blogsList: resultRow,
