@@ -558,15 +558,21 @@ app.post("/contact/submit", async (req, res) => {
 });
 
 app.post("/profile/editUser", (req, res) => {
-  const Reqname = req.user.name;
-  const Requsername = req.user.username;
-  res.render("editForm.ejs", {
-    name: Reqname,
-    username: Requsername
-  });
+  if(req.isAuthenticated()) {
+
+    const Reqname = req.user.name;
+    const Requsername = req.user.username;
+    res.render("editForm.ejs", {
+      name: Reqname,
+      username: Requsername
+    });
+  } else {
+    res.redirect("/Login");
+  }
 });
 
 app.post("/profile/editUser/submit", async (req, res) => {
+  if(req.isAuthenticated()) {
   const id = req.user.id;
   const name = req.body.name;
   const username = req.body.username;
@@ -584,6 +590,9 @@ app.post("/profile/editUser/submit", async (req, res) => {
       error: "Username Already Exist !"
     });
   }
+} else {
+  res.redirect("/Login");
+}
 });
 
 app.post("/search", async (req, res) => {
